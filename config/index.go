@@ -10,6 +10,11 @@ import (
 type envConfig struct {
 	AppPort string
 	DbPath string
+	GoogleClientID string
+	GoogleClientSecret string
+	GoogleRedirectURL string
+	JWTSaltKey string
+	FEOriginURL string
 }
 
 func (e *envConfig) LoadConfig() {
@@ -19,6 +24,11 @@ func (e *envConfig) LoadConfig() {
 	}
 	e.AppPort = loadString("APP_PORT", ":8080")
 	e.DbPath = loadString("DB_PATH", "")
+	e.GoogleClientID = loadString("GOOGLE_CLIENT_ID", "")
+	e.GoogleClientSecret = loadString("GOOGLE_CLIENT_SECRET", "")
+	e.GoogleRedirectURL = loadString("GOOGLE_REDIRECT_URL", "")
+	e.JWTSaltKey = loadString("JWT_SALT_KEY", "test_salt")
+	e.FEOriginURL = loadString("FE_ORIGIN_URL", "")
 }
 
 var Config envConfig
