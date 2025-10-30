@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/catchnaren/go-scalable-servers/config"
+	"github.com/catchnaren/go-scalable-servers/middleware"
 	"github.com/catchnaren/go-scalable-servers/routes/handlers"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -26,7 +27,7 @@ func MountRoutes() *gin.Engine {
 		})
 	})
 
-	taskRoutes := handler.Group("/task")
+	taskRoutes := handler.Group("/task", middleware.AuthorizationMiddleWare())
 	{
 		taskRoutes.POST("/", handlers.SaveTask)
 		taskRoutes.GET("/", handlers.ReadTask)
